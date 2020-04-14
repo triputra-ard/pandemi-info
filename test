@@ -1,0 +1,35 @@
+<div class="col-xl-12">
+  <div class="row">
+    <?php
+    $paging = 8;
+    $pages = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+    $start = ($pages>1) ? ($pages * $paging) - $paging : 0;
+    $previous = $pages - 1;
+    $next = $pages + 1;
+    $sqlresult = "SELECT * FROM `pandemi.localinfo`";
+    $resultquery = mysqli_query($db,$sqlresult);
+    $totalpage = mysqli_num_rows($resultquery);
+    $pagination = ceil($totalpage/$paging);
+    $sql1 = "SELECT * FROM `pandemi.localinfo`
+    LIMIT $start, $paging
+    ";
+    $querys = mysqli_query($db,$sql1);
+    while ($erlocal = mysqli_fetch_assoc($querys)) {
+    ?>
+    <div class="col-xl-3">
+      <div class="card" data-aos="fade-left" data-aos-delay="300">
+          <div class="card-header">
+              <h5>
+                 <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#<?php echo $erlocal['id_province']; ?>" aria-controls="<?php echo $erlocal['id_province']; ?>">
+                   <span class="fas fa-angle-down mr-3"></span><?php echo $erlocal['province_name']; ?>
+               </button></h5>
+          </div>
+          <div class="collapse card-body" id="<?php echo $erlocal['id_province']; ?>">
+            <a class="text-primary" href="<?php echo $erlocal['website']; ?>"><?php echo $erlocal['website']; ?><i class="fas fa-external-link-alt"></i> </a>
+          </div>
+      </div>
+    </div>
+  <?php } ?>
+</div>
+  
+</div>
