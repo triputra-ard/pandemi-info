@@ -8,3 +8,6 @@
 
 # Missing Component ?
 - For development purpose please contact me on trieputra@live.com
+
+# Demo
+- pandemi-info.epizy.com
